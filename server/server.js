@@ -1,4 +1,5 @@
 const db = require('mysql2/promise');
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
@@ -6,6 +7,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 app.use(express.json());
+app.use(cors());
 
 const pool = db.createPool({
     host: process.env.DB_HOST,
@@ -27,9 +29,9 @@ app.post('/api/register', async (req, res) => {
     } catch (err) {
         console.log(err);
         if (err.code === 'ER_DUP_ENTRY')
-            res.json({ status: 'error', msg: 'User already registered' });
+            res.json({ status: 'error', msg: 'Username is not available.' });
         else
-            res.json({ status: 'error', msg: 'Something went wrong' });
+            res.json({ status: 'error', msg: 'Something went wrong...' });
         return;
     }
 
@@ -42,11 +44,10 @@ app.post('/api/login', async (req, res) => {
 
     const query = (await pool.query('SELECT * FROM users WHERE username = ?', [username]))[0][0];
 
-    if (bcrypt.compareSync(password, query.password)) {
+    if (query && bcrypt.compareSync(password, query.password))
         res.json({ status: 'success', msg: 'Logged in successfully' });
-    } else {
-        res.json({ status: 'error', msg: 'Wrong password' });
-    }
+    else
+        res.json({ status: 'error', msg: 'Invalid username or password' });
 });
 
 app.listen(process.env.DB_PORT, () => {

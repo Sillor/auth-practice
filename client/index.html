@@ -9,22 +9,27 @@
 </head>
 
 <body>
-    <form id="logInForm">
-        <h1>Log In</h1>
-        <label for="logInUsername">Username</label>
-        <input type="text" name="username" id="logInUsername" required>
-        <label for="logInPassword">Password</label>
-        <input type="password" name="password" id="logInPassword" required>
-        <input type="submit" value="Log In">
-    </form>
-    <form id="signInForm">
-        <h1>Sign In</h1>
-        <label for="signInUsername">Username</label>
-        <input type="text" name="username" id="signInUsername" required>
-        <label for="signInPassword">Password</label>
-        <input type="password" name="password" id="signInPassword" required>
-        <input type="submit" value="Sign In">
-    </form>
+    <div class="container">
+        <h1 id="heading">Welcome!</h1>
+        <div class="forms">
+            <form id="logInForm">
+                <h1>Log In</h1>
+                <label for="logInUsername">Username</label>
+                <input type="text" name="username" id="logInUsername" required>
+                <label for="logInPassword">Password</label>
+                <input type="password" name="password" id="logInPassword" required>
+                <input type="submit" value="Log In">
+            </form>
+            <form id="signUpForm">
+                <h1>Sign Up</h1>
+                <label for="signUpUsername">Username</label>
+                <input type="text" name="username" id="signUpUsername" required>
+                <label for="signUpPassword">Password</label>
+                <input type="password" name="password" id="signUpPassword" required>
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
